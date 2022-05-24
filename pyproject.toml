@@ -13,13 +13,12 @@ create_database = "sheets_api.data:create_database"
 python = "^3.9"
 click = "^8.0.3"
 pandas = "^1.3.4"
-numpy = "^0.0"
+numpy = "^1.22"
 psycopg2 = "^2.7"
-google-api-python-client = "^0.0"
 google-auth-httplib2 = "^0.0"
 google-auth-oauthlib = "^0.0"
 oauth2client = "^4.1.3"
-threading = "^0.0"
+
 
 [tool.poetry.extras]
 pgsql = ["psycopg2"]
