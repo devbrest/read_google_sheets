@@ -15,3 +15,5 @@ password=password
 6. Для создания базы данных в терминале выполните команду poetry run create_database
 7. Для однократного запуска скрипта выполните - poetry run exchange 
 8. Чтобы запустить скрипт с обновлением каждую минуту выполните poetry run running_script
+
+Путь к книге https://docs.google.com/spreadsheets/d/18GKiLKq4zcd1UlQQnrb_C686uJ6EY9YseLAizR36YAo
