@@ -46,3 +46,4 @@ protobuf-3.20.1-py3.9-nspkg.pth
 six.py
 CHANGELOG.md
 src\sheets_api\__pycache__
+service_account.json

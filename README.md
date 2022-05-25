@@ -11,7 +11,7 @@ host=localhost
 database=db_customers_devbrest # название оставить так как есть
 user=postgres
 password=password
-
+5.1 в корень папки с программой нужно сохранить файл с ключами от сервисного аккаунта service_account.json
 6. Для создания базы данных в терминале выполните команду poetry run create_database
 7. Для однократного запуска скрипта выполните - poetry run exchange 
 8. Чтобы запустить скрипт с обновлением каждую минуту выполните poetry run running_script
