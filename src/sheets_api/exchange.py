@@ -2,13 +2,13 @@
 from datetime import datetime
 from time import sleep
 from typing import List
-from googleapiclient.errors import HttpError
 import httplib2
-import apiclient.discovery
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
-from data import connect, select, run_query
-from kurs_exchange import get_actual_rate
+from sheets_api.data import connect, select, run_query
+from sheets_api.kurs_exchange import get_actual_rate
 import decimal
 import threading 
 
@@ -31,7 +31,7 @@ def get_data_from_sheet() -> List:
     
 
     try:
-        service = apiclient.discovery.build('sheets', 'v4', http = httpAuth)
+        service = build('sheets', 'v4', http = httpAuth)
 
         # Call the Sheets API
         sheet = service.spreadsheets()
@@ -44,8 +44,8 @@ def get_data_from_sheet() -> List:
             return
         return values
 
-    except HttpError as err:
-        print(err)
+    except:
+        print("err")
 
 
 
@@ -87,7 +87,10 @@ def run_script() -> None:
                 cyrr_ = i[2] * decimal.Decimal(rate if rate > 0.0 else 1.0)
                 sqlQuery = f"""UPDATE my_orders SET my_order = {i[1]}, my_amount = {i[2]}, my_date = '{i[3]}', my_rub_amount = {cyrr_} WHERE id={i[0]}""" 
                 run_query(sqlQuery,connDatabase) 
-
+    sqlQuery = f"""SELECT * FROM my_orders""" 
+    all_records = select(sqlQuery,connDatabase)
+    """Show actual data as pandas DataFrame"""
+    print(pd.DataFrame(all_records,columns=["id","order","amount","date","rub"]))
     #closing database      
     connDatabase.close()
 

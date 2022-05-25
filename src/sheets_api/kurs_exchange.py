@@ -1,5 +1,5 @@
 from unicodedata import decimal
-from config import config, update_config
+from sheets_api.config_ import config, update_config
 from datetime import date
 import urllib.request as urli
 from xml.etree import ElementTree as ET

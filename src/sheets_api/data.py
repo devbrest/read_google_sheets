@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import psycopg2
-from config import config
+from sheets_api.config_ import config
 
 
 def connect():
@@ -53,14 +53,20 @@ def create_database():
         #Creating a database
         cursor.execute(sql)
         print("Database created successfully........")
+        cursor.close()
+        conn.close()
+        
         params = config()
         conn = psycopg2.connect(**params)
+        conn.autocommit = True
         createTableQuery = """CREATE TABLE IF NOT EXISTS my_orders(
         id BIGSERIAL PRIMARY KEY NOT NULL, 
         my_order varchar, 
         my_amount numeric(15,2), 
         my_date TIMESTAMP NOT NULL DEFAULT current_timestamp,
         my_rub_amount numeric(15,2));  """
+        cursor.close()
+        cursor = conn.cursor()
         cursor.execute(createTableQuery)
         # close the communication with the PostgreSQL
         cursor.close()
@@ -94,3 +100,5 @@ def run_query(sqlQuery, conn):
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
 
+if __name__ == "__main__":
+    create_database() 
